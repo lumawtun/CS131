@@ -1,0 +1,15 @@
+B1: grep '"city":"Santa Barbara"' /data/yelp/yelp_academic_dataset_business.json
+B2: grep -c '"state":"CA"' /data/yelp/yelp_academic_dataset_business.json
+B3: grep -i 'worth' /data/yelp/yelp_academic_dataset_review.json   (-i = case-insensitive)
+B4: grep -E 'Coffee|Caf[eé]' /data/yelp/yelp_academic_dataset_business.json
+B5: grep -E '"stars":(4\.5|5\.0)' /data/yelp/yelp_academic_dataset_business.json
+B6: grep -E '"stars":5\.0' /data/yelp/yelp_academic_dataset_review.json   (review file stores stars as float "stars":5.0, not integer "stars":5, as worksheet stated; verified via head -1)
+B7: grep -E '\w+@[[:alnum:].]+\.[[:alpha:]]{2,}' /data/yelp/yelp_academic_dataset_review.json
+B8: grep -E '[0-9]{3}-[0-9]{3}-[0-9]{4}' /data/yelp/yelp_academic_dataset_review.json
+B9: grep -E '"name":"P' /data/yelp/yelp_academic_dataset_business.json
+B10: grep -ic 'pizza' /data/yelp/yelp_academic_dataset_review.json   (-i case-insensitive, -c count)
+B11: grep -n 'service' /data/yelp/yelp_academic_dataset_review.json   (-n = print line numbers)
+B12: grep -v 'Restaurants' /data/yelp/yelp_academic_dataset_business.json   (-v = invert match)
+B13 explain: grep1 keeps CA business lines; grep -oE pulls the "review_count":N token; grep -oE [0-9]+ strips to the bare number; sort -nr orders numerically high-to-low; head -3 takes the top 3
+B13: grep '"state":"CA"' .../business.json | grep -oE '"review_count":[0-9]+' | grep -oE '[0-9]+' | sort -nr | head -3
+B14: grep '"city":"Santa Barbara"' .../business.json | grep -oE '"name":"[^"]+"' | sort
