@@ -1,0 +1,12 @@
+T1: cd ~/cs131/ws1 && pwd
+T2: ls ../data   (run from inside logs/)
+T3: file logs/app01.log .env   (file reports the type, not contents)
+T4: ls -alhr
+T5: ls -lS logs
+T6: size=1048576 bytes, owner=ishigaki-cs32, last-modified=Jun 12 23:08
+T7: ls data/Data?.csv   (? = exactly one char; matches Data1.csv, not Data10.csv)
+T8: ls [[:upper:]]*
+T9: BACKUP.[0-9][0-9][0-9]
+T10: cp -r data backup/ && ls backup/data
+T11: mv data/readme.txt data/README.md
+T12: rm -ri backup/data   (-r recursive, -i prompt before each removal)
