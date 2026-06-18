@@ -1,6 +1,6 @@
 Q1: echo "task: practice git" >> notes.md; git add notes.md; git commit -m "ws2: add task line"
 Q2: git log --oneline -3
-Q3: git log --oneline   (bad commit short hash: <HASH>)
+Q3: git log --oneline   (bad commit short hash: eee4176)
 Q4: git revert HEAD --no-edit
 Q5: git rm --cached bigdata.bin; echo "bigdata.bin" >> .gitignore; git add .gitignore; git commit --amend --no-edit; git push; rm bigdata.bin
 Q6: git switch -c feature-summary
