@@ -1,0 +1,24 @@
+A1: ls -l > listing.txt ; date >> listing.txt
+A2: ls /nonexistent_dir 2> errors.txt   (stderr = fd 2)
+A3: ls /nonexistent_dir /etc > output.txt 2> errors.txt
+A4: ls /nonexistent_dir /etc &> combined.txt
+A5: ls /nonexistent_dir /etc 2>/dev/null -- only /etc listing prints; the error went to /dev/null, a device file that discards all input.
+A6: sort fruits.txt | uniq
+A7: sort fruits.txt | uniq -c | sort -rn
+A8: grep -c ERROR server.log
+A9: cat server.log | grep ERROR > errors_only.txt
+A10: grep -oE '^[A-Z]+' server.log | sort | uniq -c | sort -rn
+A11: grep -oE '"state":"[A-Z]+"' /data/yelp/yelp_academic_dataset_business.json | sort | uniq -c | sort -rn | head -5  (top 5: PA FL TN IN MO)
+B1: id -- uid=1065(ishigaki-cs32) gid=1065(ishigaki-cs32) groups=1065,44(video),988(docker),993(render); uid identifies the user, gid the primary group.
+B2: ls -l fruits.txt -> -rw-rw-r--; owner rw-, group rw-, other r--.
+B3: umask -> 0002; new files = 666 - 002 = 664 (-rw-rw-r--); verified with umask_test.txt.
+B4: chmod 000 secret.txt ; chmod u+rw secret.txt   (cat error: Permission denied)
+B5: chmod 640 fruits.txt   (octal 640 -> -rw-r-----)
+B6: find . -type f -user "$(whoami)" -perm -u+w
+C1: bash long.sh > log.txt &   (PID printed by shell)
+C2: jobs -> job number, status, command
+C3: fg %1 then Ctrl-Z ; jobs -> Stopped
+C4: bg %1 -> Running
+C5: kill %1   (default signal: SIGTERM / 15)
+C6: ps -p <PID>
+C7: disown removes the job from the shell's job table so it gets no SIGHUP on terminal close; a plain & job stays a child of the shell, receives SIGHUP, and is terminated by default.
