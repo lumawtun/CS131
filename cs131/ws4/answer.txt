@@ -1,0 +1,68 @@
+========================================
+T1: Two functions from the sample .bashrc
+========================================
+
+https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c#file-the-ultimate-bad-ass-bashrc-file-L244
+
+extract ()
+
+extract() unpacks any archive without needing to remember each tool's flags.
+- "for archive in $*" loops over every argument passed to the function.
+- The if condition "[ -f $archive ]" tests whether that argument is an existing
+  regular file.
+  - If TRUE, a "case" matches the filename's extension and runs the matching
+    tool: *.tar.bz2 -> tar xvjf, *.tar.gz -> tar xvzf, *.gz -> gunzip,
+    *.zip -> unzip, *.7z -> 7z x, etc. The final "*)" default prints
+    "don't know how to extract" for any unknown extension.
+  - If FALSE (the else branch), it prints "'$archive' is not a valid file!".
+- "fi" closes the if; "done" closes the loop, so multiple archives can be
+  extracted in one call.
+
+
+https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c#file-the-ultimate-bad-ass-bashrc-file-L329
+
+up ()
+
+up() climbs N parent directories in one command (e.g. "up 3" = cd ../../..).
+- "limit=$1" stores the number the user passed in.
+- The for-loop "for ((i=1 ; i <= limit ; i++))" appends "/.." to the variable d
+  once per level, building a string like "/../../..".
+- "sed 's/^\///'" strips the leading slash, turning it into "../../..".
+- The if condition "[ -z "$d" ]" checks whether d is empty (i.e. no argument or
+  0 was given). If TRUE, it sets d=".." so the function still moves up one level
+  instead of doing nothing. "fi" closes the if.
+- "cd $d" performs the actual move up the directory tree.
+
+
+========================================
+T2: My own .bashrc (function + alias + if-statement)
+========================================
+
+<PERMALINK_FUNCTION>
+
+gacp() { ... git add -A && git commit -m "$1" && git push ; }
+
+A shell function that stages, commits, and pushes in one step. The if condition
+"[ -z "$1" ]" checks whether a commit message was supplied; if not, it prints a
+usage hint and returns 1 (error) instead of committing with an empty message.
+When a message is given, "git add -A && git commit -m "$1" && git push" runs the
+three commands in sequence, stopping if any one fails. I use this constantly to
+submit worksheets (e.g. gacp "ws4: .bashrc").
+
+
+<PERMALINK_ALIAS>
+
+alias cs131='cd ~/cs131'
+
+An alias that jumps straight into my CS131 repo from anywhere. Every worksheet
+starts with cd ~/cs131, so this saves typing the full path each session.
+
+
+<PERMALINK_IF>
+
+if [ -x /usr/bin/dircolors ]; then alias grep='grep --color=auto'; fi
+
+An if-statement that enables colored grep output only when it is safe to. The
+test "[ -x /usr/bin/dircolors ]" checks that the dircolors program exists and is
+executable; only then does it define the colored grep alias. This avoids setting
+an alias that would break on a system without color support.
