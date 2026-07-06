@@ -38,7 +38,7 @@ up() climbs N parent directories in one command (e.g. "up 3" = cd ../../..).
 T2: My own .bashrc (function + alias + if-statement)
 ========================================
 
-<PERMALINK_FUNCTION>
+https://github.com/lumawtun/CS131/blob/ea5cea2/cs131/ws4/.bashrc#L22
 
 gacp() { ... git add -A && git commit -m "$1" && git push ; }
 
@@ -50,7 +50,7 @@ three commands in sequence, stopping if any one fails. I use this constantly to
 submit worksheets (e.g. gacp "ws4: .bashrc").
 
 
-<PERMALINK_ALIAS>
+https://github.com/lumawtun/CS131/blob/ea5cea2/cs131/ws4/.bashrc#L11
 
 alias cs131='cd ~/cs131'
 
@@ -58,7 +58,7 @@ An alias that jumps straight into my CS131 repo from anywhere. Every worksheet
 starts with cd ~/cs131, so this saves typing the full path each session.
 
 
-<PERMALINK_IF>
+https://github.com/lumawtun/CS131/blob/ea5cea2/cs131/ws4/.bashrc#L17
 
 if [ -x /usr/bin/dircolors ]; then alias grep='grep --color=auto'; fi
 
